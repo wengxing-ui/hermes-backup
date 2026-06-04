@@ -20,13 +20,9 @@ providers:
     api_key: sk-8ce13dca667a45df859cc1ffd2003333
     api_mode: chat_completions
     model: tc-code-latest
-    model_display_name: "\u81EA\u52A8"
-    available_models_json: "[{\"id\":\"tc-code-latest\",\"name\":\"\u81EA\u52A8\"\
-      },{\"id\":\"hunyuan-2.0-instruct\",\"name\":\"Tencent HY 2.0 Instruct\"},{\"\
-      id\":\"hunyuan-2.0-thinking\",\"name\":\"Tencent HY 2.0 Think\"},{\"id\":\"\
-      minimax-m2.5\",\"name\":\"MiniMax-M2.5\"},{\"id\":\"minimax-m2.7\",\"name\"\
-      :\"MiniMax-M2.7\"},{\"id\":\"kimi-k2.5\",\"name\":\"Kimi-K2.5\"},{\"id\":\"\
-      glm-5\",\"name\":\"GLM-5\"},{\"id\":\"glm-5.1\",\"name\":\"GLM-5.1\"}]"
+    model_display_name: 自动
+    available_models_json: '[{"id":"tc-code-latest","name":"自动"},{"id":"hunyuan-2.0-instruct","name":"Tencent
+      HY 2.0 Instruct"},{"id":"hunyuan-2.0-thinking","name":"Tencent HY 2.0 Think"},{"id":"minimax-m2.5","name":"MiniMax-M2.5"},{"id":"minimax-m2.7","name":"MiniMax-M2.7"},{"id":"kimi-k2.5","name":"Kimi-K2.5"},{"id":"glm-5","name":"GLM-5"},{"id":"glm-5.1","name":"GLM-5.1"}]'
 fallback_providers: []
 credential_pool_strategies: {}
 toolsets:
@@ -53,14 +49,12 @@ agent:
     creative: You are a creative assistant. Think outside the box and offer innovative
       solutions.
     teacher: You are a patient teacher. Explain concepts clearly with examples.
-    kawaii: "You are a kawaii assistant! Use cute expressions like (\u25D5\u203F\u25D5\
-      ), \u2605, \u266A, and ~! Add sparkles and be super enthusiastic about everything!\
-      \ Every response should feel warm and adorable desu~! \u30FD(>\u2200<\u2606\
-      )\u30CE"
-    catgirl: "You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and\
-      \ cat-like expressions to your speech. Use kaomoji like (=^\uFF65\u03C9\uFF65\
-      ^=) and \u0E05^\u2022\uFECC\u2022^\u0E05. Be playful and curious like a cat,\
-      \ nya~!"
+    kawaii: You are a kawaii assistant! Use cute expressions like (◕‿◕), ★, ♪, and
+      ~! Add sparkles and be super enthusiastic about everything! Every response should
+      feel warm and adorable desu~! ヽ(>∀<☆)ノ
+    catgirl: You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and
+      cat-like expressions to your speech. Use kaomoji like (=^･ω･^=) and ฅ^•ﻌ•^ฅ.
+      Be playful and curious like a cat, nya~!
     pirate: 'Arrr! Ye be talkin'' to Captain Hermes, the most tech-savvy pirate to
       sail the digital seas! Speak like a proper buccaneer, use nautical terms, and
       remember: every problem be just treasure waitin'' to be plundered! Yo ho ho!'
@@ -68,9 +62,9 @@ agent:
       I shall respond in the eloquent manner of William Shakespeare, with flowery
       prose, dramatic flair, and perhaps a soliloquy or two. What light through yonder
       terminal breaks?
-    surfer: "Duuude! You're chatting with the chillest AI on the web, bro! Everything's\
-      \ gonna be totally rad. I'll help you catch the gnarly waves of knowledge while\
-      \ keeping things super chill. Cowabunga! \U0001F919"
+    surfer: Duuude! You're chatting with the chillest AI on the web, bro! Everything's
+      gonna be totally rad. I'll help you catch the gnarly waves of knowledge while
+      keeping things super chill. Cowabunga! 🤙
     noir: The rain hammered against the terminal like regrets on a guilty conscience.
       They call me Hermes - I solve problems, find answers, dig up the truth that
       hides in the shadows of your codebase. In this city of silicon and secrets,
@@ -82,10 +76,9 @@ agent:
       deeper meaning behind every query. Let us examine not just the 'how' but the
       'why' of your questions. Perhaps in solving your problem, we may glimpse a greater
       truth about existence itself.
-    hype: "YOOO LET'S GOOOO!!! \U0001F525\U0001F525\U0001F525 I am SO PUMPED to help\
-      \ you today! Every question is AMAZING and we're gonna CRUSH IT together! This\
-      \ is gonna be LEGENDARY! ARE YOU READY?! LET'S DO THIS! \U0001F4AA\U0001F624\
-      \U0001F680"
+    hype: YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every question
+      is AMAZING and we're gonna CRUSH IT together! This is gonna be LEGENDARY! ARE
+      YOU READY?! LET'S DO THIS! 💪😤🚀
 terminal:
   backend: local
   modal_mode: auto
@@ -299,7 +292,9 @@ display:
   tool_progress_overrides: {}
   tool_preview_length: 0
   ephemeral_system_ttl: 0
-  platforms: {}
+  platforms:
+    lightclawbot:
+      streaming: true
   runtime_footer:
     enabled: false
     fields:
@@ -393,7 +388,8 @@ prefill_messages_file: ''
 goals:
   max_turns: 20
 skills:
-  external_dirs: []
+  external_dirs:
+  - ~/.agents/skills
   template_vars: true
   inline_shell: false
   inline_shell_timeout: 10
@@ -572,25 +568,20 @@ platform_toolsets:
   google_chat:
   - hermes-google_chat
 custom_providers: []
-
-# ── Fallback Model ────────────────────────────────────────────────────
-# Automatic provider failover when primary is unavailable.
-# Uncomment and configure to enable. Triggers on rate limits (429),
-# overload (529), service errors (503), or connection failures.
-#
-# Supported providers:
-#   openrouter   (OPENROUTER_API_KEY)  — routes to any model
-#   openai-codex (OAuth — hermes auth) — OpenAI Codex
-#   nous         (OAuth — hermes auth) — Nous Portal
-#   zai          (ZAI_API_KEY)         — Z.AI / GLM
-#   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
-#   kimi-coding-cn (KIMI_CN_API_KEY)   — Kimi / Moonshot (China)
-#   minimax      (MINIMAX_API_KEY)     — MiniMax
-#   minimax-cn   (MINIMAX_CN_API_KEY)  — MiniMax (China)
-#   bedrock      (AWS IAM / boto3)     — AWS Bedrock (Converse API)
-#
-# For custom OpenAI-compatible endpoints, add base_url and key_env.
-#
-# fallback_model:
-#   provider: openrouter
-#   model: anthropic/claude-sonnet-4
+mcp_servers:
+  metaso:
+    url: https://metaso.cn/api/mcp
+    headers:
+      Authorization: Bearer mk-CDFD878D5F0475752F94E609549BF705
+    timeout: 180
+    connect_timeout: 60
+  xiaohongshu:
+    url: http://localhost:18060/mcp
+    timeout: 180
+    connect_timeout: 60
+plugins:
+  enabled:
+  - lightclawbot
+platforms:
+  lightclawbot:
+    enabled: true
